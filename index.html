@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website – Vopsire în Câmp Electrostatic</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    /* Compensează header-ul sticky la scroll către ancore (#servicii, #galerie, etc.) */
+    html{ scroll-behavior:smooth; scroll-padding-top: 120px; }
+    @media (min-width: 768px){ html{ scroll-padding-top: 136px; } }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- CONFIG EDITABIL (modifici doar valorile) -->
+  <script id="CONFIG">
+    window.SITE = {
+      company: "ZINCHERIA",
+      slogan: "Finisaje industriale durabile",
+      phone: "+40 700 111 222",
+      whatsapp: "+40 700 111 222",
+      email: "oferta@electrocoat.ro",
+      logo: "images/logo.png",
+      address: "Str. Exemplu 123, București",
+      maps: { lat: 44.426767, lon: 26.102538 },
+      about: "Peste 10 ani de experiență în finisaje industriale și investiții continue în tehnologie.",
+      services: [
+        { title: "Vopsire electrostatică", desc: "Strat uniform, rezistent, în orice culoare RAL." },
+        { title: "Zincare / anticoroziv", desc: "Protecție de lungă durată împotriva coroziunii." },
+        { title: "Pregătire și sablare", desc: "Degresare, fosfatare, sablare SA 2.5." }
+      ],
+      gallery: ["images/1.jpg", "images/2.jpg", "images/3.jpg", "images/4.jpg", "images/5.jpg", "images/6.jpg", "images/7.jpg", "images/8.jpg"]
+    };
+  </script>
+
+  <header class="sticky top-0 bg-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="font-bold text-xl" id="brand"></h1>
+      <nav class="space-x-4 text-sm hidden md:block">
+        <a href="#servicii" class="hover:text-gray-700">Servicii</a>
+        <a href="#galerie" class="hover:text-gray-700">Galerie</a>
+        <a href="#despre" class="hover:text-gray-700">Despre noi</a>
+        <a href="#locatie" class="hover:text-gray-700">Locație</a>
+        <a href="#contact" class="hover:text-gray-700">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h2 class="text-4xl font-extrabold" id="hero-slogan"></h2>
+      <p class="mt-4 text-gray-600">Vopsire în câmp electrostatic, zincare și pregătire suprafețe.</p>
+      <a href="#contact" class="inline-block mt-6 bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">Solicită ofertă</a>
+    </div>
+    <!-- HERO image înlăturată, logo este sus în navbar -->
+  </section>
+
+  <section id="servicii" class="scroll-mt-36 bg-white py-16 border-t">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Serviciile noastre</h2>
+      <div id="services-list" class="grid md:grid-cols-3 gap-6 mt-8"></div>
+    </div>
+  </section>
+
+  <section id="galerie" class="scroll-mt-36 bg-gray-50 py-16 border-t">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Galerie lucrări</h2>
+      <div id="gallery-grid" class="grid md:grid-cols-3 gap-4 mt-8"></div>
+<button id="view-all" class="mt-3 text-sm inline-flex items-center gap-2 px-3 py-1.5 border rounded hover:bg-gray-100">Vezi toate pozele</button>
+    </div>
+  </section>
+
+  <section id="despre" class="scroll-mt-36 bg-white py-16 border-t">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="text-3xl font-bold">Despre noi</h2>
+        <p id="about-text" class="mt-4 text-gray-600"></p>
+      </div>
+      <img src="images/despre.jpg"" class="rounded-xl shadow" />
+    </div>
+  </section>
+
+  <section id="locatie" class="scroll-mt-36 bg-gray-50 py-16 border-t">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Unde ne găsești</h2>
+      <p id="address" class="text-gray-600 mt-2"></p>
+      <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <iframe id="map-google" class="w-full h-64 rounded-xl border"></iframe>
+        <iframe id="map-waze" class="w-full h-64 rounded-xl border"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="scroll-mt-36 bg-white py-16 border-t">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="text-3xl font-bold">Contact</h2>
+        <p class="mt-2 text-gray-600">Telefon: <a id="phone" class="text-green-600"></a></p>
+        <p class="mt-1 text-gray-600">Email: <a id="email" class="text-green-600"></a></p>
+      </div>
+      <form class="space-y-3 p-5 border rounded-xl bg-gray-50">
+        <input class="w-full p-2 border rounded" placeholder="Nume / firmă" />
+        <input class="w-full p-2 border rounded" type="email" placeholder="Email" />
+        <textarea class="w-full p-2 border rounded" rows="4" placeholder="Mesaj"></textarea>
+        <button class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Trimite</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-gray-100 py-6 text-center text-gray-600 border-t" id="footer"></footer>
+
+  <script>
+    (function(){
+      var S = window.SITE;
+      document.getElementById('brand').textContent = S.company;
+      document.getElementById('hero-slogan').textContent = S.slogan;
+      document.getElementById('about-text').textContent = S.about;
+      document.getElementById('address').textContent = S.address;
+      document.getElementById('phone').textContent = S.phone;
+      document.getElementById('phone').href = 'tel:' + S.phone;
+      document.getElementById('email').textContent = S.email;
+      document.getElementById('email').href = 'mailto:' + S.email;
+
+      var gdir = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(S.address);
+      document.getElementById('map-google').src = 'https://www.google.com/maps?q=' + S.maps.lat + ',' + S.maps.lon + '&z=15&output=embed';
+      document.getElementById('map-waze').src = 'https://embed.waze.com/iframe?zoom=15&lat=' + S.maps.lat + '&lon=' + S.maps.lon;
+
+      var sHTML = '';
+      for(var i=0;i<S.services.length;i++){
+        sHTML += '<div class="p-5 border rounded-xl bg-gray-50"><h3 class="font-semibold text-lg">' + S.services[i].title + '</h3><p class="text-gray-600 mt-2">' + S.services[i].desc + '</p></div>';
+      }
+      document.getElementById('services-list').innerHTML = sHTML;
+
+      // Galerie — afiseaza 3 poze, roteste automat, si buton "Vezi toate"
+var G = S.gallery || [];
+var grid = document.getElementById('gallery-grid');
+var viewAllBtn = document.getElementById('view-all');
+
+if (!G.length){
+  grid.innerHTML = '<p class="text-gray-500">Adaugă imagini în CONFIG.</p>';
+  viewAllBtn.classList.add('hidden');
+} else {
+  // construim 3 sloturi
+  grid.innerHTML = '';
+  for (var k=0;k<3;k++){
+    grid.innerHTML += '<div class="rounded-xl overflow-hidden shadow cursor-pointer">'
+      + '<img class="w-full h-44 object-cover" data-slot="'+k+'" src="" alt="Lucrare"/>'
+      + '</div>';
+  }
+  var slots = Array.from(grid.querySelectorAll('img[data-slot]'));
+  var start = 0; // index de start pentru rotatie
+  var currentIndices = [0,1,2];
+
+  function renderSlots(){
+    for (var i=0;i<slots.length;i++){
+      var idx = (start + i) % G.length;
+      currentIndices[i] = idx;
+      slots[i].src = G[idx];
+      slots[i].alt = 'Lucrare ' + (idx+1);
+      slots[i].dataset.index = idx; // pentru lightbox
+    }
+  }
+  renderSlots();
+
+  // Rotire automata la 2.5 secunde
+  var rotTimer = setInterval(function(){
+    start = (start + 1) % G.length;
+    renderSlots();
+  }, 2500);
+
+  // Click pe slot -> deschide lightbox pe indexul real
+  slots.forEach(function(img){
+    img.addEventListener('click', function(){ openLb(parseInt(this.dataset.index,10)); });
+  });
+
+  // Buton "Vezi toate pozele"
+  viewAllBtn.addEventListener('click', function(){ openLb(0); });
+}
+
+
+      // Footer
+      document.getElementById('footer').textContent = '© ' + (new Date().getFullYear()) + ' ' + S.company + ' – Toate drepturile rezervate';
+
+      // Logo opțional: dacă setezi SITE.logo = "images/logo.png", înlocuim brand-ul cu imaginea
+      if (S.logo){
+        var brand = document.getElementById('brand');
+        brand.innerHTML = '<img src="'+S.logo+'" alt="'+S.company+'" class="h-20 md:h-24 w-auto max-w-none object-contain"/>';
+      }
+    })();
+  </script>
+  <!-- Lightbox simplu pentru toate pozele -->
+  <div id="lb" class="fixed inset-0 hidden z-50">
+    <div id="lbBg" class="absolute inset-0 bg-black bg-opacity-90"></div>
+    <button id="lbClose" class="absolute top-4 right-4 text-white text-3xl">×</button>
+    <button id="lbPrev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl">❮</button>
+    <img id="lbImg" class="max-w-[90%] max-h-[90%] rounded shadow absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"/>
+    <button id="lbNext" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl">❯</button>
+  </div>
+
+  <script>
+    // Lightbox logic (foloseste lista G din galerie)
+    var lb = document.getElementById('lb');
+    var lbImg = document.getElementById('lbImg');
+    var lbPrev = document.getElementById('lbPrev');
+    var lbNext = document.getElementById('lbNext');
+    var lbClose = document.getElementById('lbClose');
+    var lbBg = document.getElementById('lbBg');
+    var lbIndex = 0;
+
+    function showLb(){ lbImg.src = (window.SITE && window.SITE.gallery ? window.SITE.gallery[lbIndex] : ''); }
+    function openLb(i){ lbIndex = i||0; showLb(); lb.classList.remove('hidden'); document.body.style.overflow='hidden'; }
+    function closeLb(){ lb.classList.add('hidden'); document.body.style.overflow=''; }
+
+    lbPrev && lbPrev.addEventListener('click', function(){ var G = window.SITE.gallery||[]; lbIndex = (lbIndex-1+G.length)%G.length; showLb(); });
+    lbNext && lbNext.addEventListener('click', function(){ var G = window.SITE.gallery||[]; lbIndex = (lbIndex+1)%(window.SITE.gallery||[]).length; showLb(); });
+    lbClose && lbClose.addEventListener('click', closeLb);
+    lbBg && lbBg.addEventListener('click', closeLb);
+    window.addEventListener('keydown', function(e){ if(lb.classList.contains('hidden')) return; if(e.key==='Escape') closeLb(); if(e.key==='ArrowLeft') lbPrev.click(); if(e.key==='ArrowRight') lbNext.click(); });
+  </script>
+</body>
+</html>
